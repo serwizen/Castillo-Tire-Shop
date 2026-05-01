@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castillo Tire Shop | San Antonio's Most Trusted Tire Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlack: '#111111',
+                        brandRed: '#CC0000',
+                        brandGray: '#F5F5F5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Oswald & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-oswald { font-family: 'Oswald', sans-serif; }
+        
+        /* Tire Tread Pattern */
+        .tire-tread {
+            background-color: #111111;
+            background-image: 
+                linear-gradient(45deg, #1a1a1a 25%, transparent 25%), 
+                linear-gradient(-45deg, #1a1a1a 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #1a1a1a 75%), 
+                linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px 20px, 20px 0;
+        }
+
+        /* Hero Overlay */
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(17,17,17,0.7), rgba(17,17,17,0.95));
+        }
+
+        /* Card Hover Effects */
+        .service-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-left: 4px solid #CC0000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- SECTION: Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brandBlack text-white shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold tracking-tighter text-brandRed hover:text-white transition-colors duration-300">
+                        CASTILLO TIRE SHOP
+                    </a>
+                </div>
+                
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="hover:text-brandRed font-medium transition-colors">Services</a>
+                    <a href="#about" class="hover:text-brandRed font-medium transition-colors">About</a>
+                    <a href="#reviews" class="hover:text-brandRed font-medium transition-colors">Reviews</a>
+                    <a href="#contact" class="hover:text-brandRed font-medium transition-colors">Contact</a>
+                    <a href="#location" class="hover:text-brandRed font-medium transition-colors">Hours</a>
+                    <a href="tel:+19038863704" class="bg-brandRed hover:bg-red-700 text-white px-6 py-2 rounded-sm font-bold uppercase tracking-wider transition-all">
+                        CALL NOW
+                    </a>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-white focus:outline-none p-2" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden bg-brandBlack border-t border-gray-800">
+            <div class="px-4 py-6 space-y-4 flex flex-col text-center">
+                <a href="#services" class="text-lg hover:text-brandRed transition-colors" onclick="toggleMenu()">Services</a>
+                <a href="#about" class="text-lg hover:text-brandRed transition-colors" onclick="toggleMenu()">About</a>
+                <a href="#reviews" class="text-lg hover:text-brandRed transition-colors" onclick="toggleMenu()">Reviews</a>
+                <a href="#contact" class="text-lg hover:text-brandRed transition-colors" onclick="toggleMenu()">Contact</a>
+                <a href="#location" class="text-lg hover:text-brandRed transition-colors" onclick="toggleMenu()">Hours</a>
+                <a href="tel:+19038863704" class="bg-brandRed text-white py-3 font-bold rounded-sm uppercase">CALL NOW</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION: Hero -->
+    <header class="relative min-h-screen flex items-center tire-tread pt-20">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-white text-center md:text-left grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6 uppercase tracking-tight">
+                    San Antonio's Most <span class="text-brandRed">Trusted</span> Tire Shop
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl italic">
+                    Fast service. Fair prices. Family owned and operated since 2010. Your safety is our business.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                    <a href="tel:+12105550000" class="flex items-center justify-center bg-brandRed hover:bg-red-700 text-white px-8 py-4 rounded-sm text-lg font-bold uppercase transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-phone mr-3"></i> Call Now
+                    </a>
+                    <a href="#contact" class="flex items-center justify-center bg-transparent border-2 border-white hover:bg-white hover:text-brandBlack text-white px-8 py-4 rounded-sm text-lg font-bold uppercase transition-all">
+                        Get a Free Quote
+                    </a>
+                </div>
+                
+                <!-- Trust Badges -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm font-semibold opacity-90 uppercase tracking-widest text-brandRed">
+                    <div class="flex items-center"><i class="fa-solid fa-check mr-2"></i> Same-Day Service</div>
+                    <div class="flex items-center"><i class="fa-solid fa-check mr-2"></i> All Major Brands</div>
+                    <div class="flex items-center"><i class="fa-solid fa-check mr-2"></i> Free Inspection</div>
+                    <div class="flex items-center"><i class="fa-solid fa-check mr-2"></i> Walk-Ins Welcome</div>
+                </div>
+            </div>
+
+            <!-- Stats Counters -->
+            <div class="grid grid-cols-1 gap-6 fade-in" style="transition-delay: 200ms;">
+                <div class="bg-white/5 backdrop-blur-sm p-8 border border-white/10 rounded-lg">
+                    <div class="text-6xl font-bold text-brandRed mb-2 stat-counter" data-target="500" data-suffix="+">0</div>
+                    <div class="text-lg uppercase tracking-widest font-oswald text-gray-400">5-Star Reviews</div>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm p-8 border border-white/10 rounded-lg">
+                    <div class="text-6xl font-bold text-brandRed mb-2 stat-counter" data-target="15" data-suffix="+">0</div>
+                    <div class="text-lg uppercase tracking-widest font-oswald text-gray-400">Years Experience</div>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm p-8 border border-white/10 rounded-lg">
+                    <div class="text-6xl font-bold text-brandRed mb-2 stat-counter" data-target="10000" data-suffix="+">0</div>
+                    <div class="text-lg uppercase tracking-widest font-oswald text-gray-400">Tires Sold Yearly</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION: Services -->
+    <section id="services" class="py-24 bg-brandGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold uppercase mb-4">What We Do</h2>
+                <div class="w-24 h-1 bg-brandRed mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+                    We offer a full range of tire and maintenance services to keep your vehicle running smoothly and safely on the Texas roads.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 service-card fade-in">
+                    <div class="text-brandRed text-4xl mb-6"><i class="fa-solid fa-dharmachakra"></i></div>
+                    <h3 class="text-2xl font-bold mb-3 uppercase">Tire Sales & Installation</h3>
+                    <p class="text-gray-600">All major brands, all sizes. Performance, off-road, or economy options available.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 service-card fade-in">
+                    <div class="text-brandRed text-4xl mb-6"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3 class="text-2xl font-bold mb-3 uppercase">Mounting & Balancing</h3>
+                    <p class="text-gray-600">Smooth ride guaranteed with our precision computer balancing equipment.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 service-card fade-in">
+                    <div class="text-brandRed text-4xl mb-6"><i class="fa-solid fa-wrench"></i></div>
+                    <h3 class="text-2xl font-bold mb-3 uppercase">Wheel Alignment</h3>
+                    <p class="text-gray-600">Protect your tires and improve handling with our expert alignment service.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-8 service-card fade-in">
+                    <div class="text-brandRed text-4xl mb-6"><i class="fa-solid fa-oil-can"></i></div>
+                    <h3 class="text-2xl font-bold mb-3 uppercase">Oil Changes</h3>
+                    <p class="text-gray-600">Quick lube service to keep your engine happy. Fully synthetic and high mileage available.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-white p-8 service-card fade-in">
+                    <div class="text-brandRed text-4xl mb-6"><i class="fa-solid fa-stop-circle"></i></div>
+                    <h3 class="text-2xl font-bold mb-3 uppercase">Brake Service</h3>
+                    <p class="text-gray-600">Brake pads, rotors, and fluid checks. Stop safely every single time.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-white p-8 service-card fade-in">
+                    <div class="text-brandRed text-4xl mb-6"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3 class="text-2xl font-bold mb-3 uppercase">Flat Tire Repair</h3>
+                    <p class="text-gray-600">Nail in your tire? We'll patch it up and get you back on the road in minutes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Why Choose Us -->
+    <section id="about" class="py-24 bg-brandBlack text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center mb-16">
+                <div class="fade-in">
+                    <h2 class="text-4xl md:text-5xl font-bold uppercase mb-8">Why Castillo?</h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        At Castillo Tire Shop, we treat every vehicle like it belongs to one of our own family members. Since 2010, we've built our reputation on honesty, speed, and unbeatable prices.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-white/10 p-3 rounded-sm mr-4 text-brandRed"><i class="fa-solid fa-house-chimney text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl uppercase mb-1">Family Owned & Operated</h4>
+                                <p class="text-gray-500">Dealing directly with the owners means accountability and care.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-white/10 p-3 rounded-sm mr-4 text-brandRed"><i class="fa-solid fa-bolt text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl uppercase mb-1">Fast Turnaround</h4>
+                                <p class="text-gray-500">We value your time. Most services are completed while you wait.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-white/10 p-3 rounded-sm mr-4 text-brandRed"><i class="fa-solid fa-dollar-sign text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl uppercase mb-1">Competitive Prices</h4>
+                                <p class="text-gray-500">Quality service doesn't have to break the bank. No hidden fees.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-white/10 p-3 rounded-sm mr-4 text-brandRed"><i class="fa-solid fa-handshake text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl uppercase mb-1">Honest & Transparent</h4>
+                                <p class="text-gray-500">We only recommend what you actually need. No upsells, ever.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image/Video Placeholder Column -->
+                <div class="hidden md:block relative fade-in" style="transition-delay: 200ms;">
+                    <div class="aspect-video bg-gray-800 rounded-lg overflow-hidden border border-white/10 flex items-center justify-center p-12">
+                        <div class="text-center">
+                            <i class="fa-solid fa-truck-pickup text-6xl text-gray-600 mb-4"></i>
+                            <h3 class="text-2xl font-bold uppercase italic text-gray-500">Serving Central Texas Drivers Since 2010</h3>
+                        </div>
+                    </div>
+                    <!-- Stats Bar Floating -->
+                    <div class="absolute -bottom-8 -left-8 bg-brandRed p-8 rounded-sm shadow-2xl">
+                        <div class="text-3xl font-bold">5,000+</div>
+                        <div class="text-sm font-semibold uppercase tracking-widest">Happy Customers</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Bar Extension -->
+            <div class="border-t border-white/10 pt-12 flex flex-wrap justify-between gap-8 text-center fade-in">
+                <div class="flex-1 min-w-[200px]">
+                    <div class="text-gray-500 uppercase tracking-widest text-xs mb-2">Experience</div>
+                    <div class="text-xl font-bold">15 Years in Business</div>
+                </div>
+                <div class="flex-1 min-w-[200px]">
+                    <div class="text-gray-500 uppercase tracking-widest text-xs mb-2">Selection</div>
+                    <div class="text-xl font-bold">All Major Tire Brands</div>
+                </div>
+                <div class="flex-1 min-w-[200px]">
+                    <div class="text-gray-500 uppercase tracking-widest text-xs mb-2">Convenience</div>
+                    <div class="text-xl font-bold">Walk-Ins Always Welcome</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Reviews -->
+    <section id="reviews" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold uppercase mb-4">What Our Customers Say</h2>
+                <div class="w-24 h-1 bg-brandRed mx-auto mb-6"></div>
+                <div class="flex items-center justify-center space-x-2 text-yellow-500 mb-8">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-gray-800 font-bold ml-2">4.9 / 5.0</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- Review 1 -->
+                <div class="bg-brandGray p-8 rounded-lg relative fade-in">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Best tire shop in the area! Fast service and great prices. Mr. Castillo and his team are pros. Will definitely be back."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-700 mr-3">RJ</div>
+                        <div>
+                            <div class="font-bold">Ricardo Jimenez</div>
+                            <div class="text-xs text-gray-500 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22Color%22_Logo.svg" alt="Google" class="h-3 mr-1 opacity-50"> Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="bg-brandGray p-8 rounded-lg relative fade-in" style="transition-delay: 100ms;">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Came in with a flat at 5 PM on a Friday and was back on the road in 20 minutes! Amazing team, super professional."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-700 mr-3">SM</div>
+                        <div>
+                            <div class="font-bold">Sarah Miller</div>
+                            <div class="text-xs text-gray-500 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22Color%22_Logo.svg" alt="Google" class="h-3 mr-1 opacity-50"> Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="bg-brandGray p-8 rounded-lg relative fade-in" style="transition-delay: 200ms;">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Very honest shop. They told me I only needed one tire, not two. Saved me money when they could have easily sold me more. Rare find!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-700 mr-3">GT</div>
+                        <div>
+                            <div class="font-bold">Gary Thompson</div>
+                            <div class="text-xs text-gray-500 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22Color%22_Logo.svg" alt="Google" class="h-3 mr-1 opacity-50"> Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 4 -->
+                <div class="bg-brandGray p-8 rounded-lg relative fade-in" style="transition-delay: 300ms;">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Family-owned feel. Mr. Castillo took care of my whole family's cars. They treat you with respect. Highly recommend!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-700 mr-3">LP</div>
+                        <div>
+                            <div class="font-bold">Linda Parker</div>
+                            <div class="text-xs text-gray-500 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22Color%22_Logo.svg" alt="Google" class="h-3 mr-1 opacity-50"> Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center fade-in">
+                <a href="#" class="inline-block bg-brandRed hover:bg-red-700 text-white px-10 py-4 rounded-sm font-bold uppercase transition-all shadow-lg">
+                    See All Reviews on Google
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Free Quote / Contact -->
+    <section id="contact" class="py-24 bg-brandGray border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold uppercase mb-4">Get a Free Quote</h2>
+                <p class="text-gray-600">Fill out the form below and we'll get back to you with a competitive estimate.</p>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-white p-8 md:p-12 shadow-2xl rounded-sm fade-in">
+                <form id="quote-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-gray-700 mb-2">Full Name *</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 focus:border-brandRed focus:ring-1 focus:ring-brandRed outline-none transition-all rounded-sm" placeholder="John Doe">
+                            <span id="name-error" class="text-brandRed text-xs font-bold mt-1 hidden">Please enter your name.</span>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-gray-700 mb-2">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 focus:border-brandRed focus:ring-1 focus:ring-brandRed outline-none transition-all rounded-sm" placeholder="(210) 000-0000">
+                            <span id="phone-error" class="text-brandRed text-xs font-bold mt-1 hidden">Please enter your phone number.</span>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-gray-700 mb-2">Service Needed</label>
+                            <select name="service" class="w-full px-4 py-3 border border-gray-300 focus:border-brandRed focus:ring-1 focus:ring-brandRed outline-none transition-all rounded-sm bg-white">
+                                <option value="tire-purchase">Tire Purchase</option>
+                                <option value="mounting-balancing">Mounting & Balancing</option>
+                                <option value="alignment">Wheel Alignment</option>
+                                <option value="oil-change">Oil Change</option>
+                                <option value="brake-service">Brake Service</option>
+                                <option value="flat-repair">Flat Tire Repair</option>
+                                <option value="other">Other / Inspection</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-gray-700 mb-2 text-gray-400 italic">Tire Size (Optional)</label>
+                            <input type="text" name="tire-size" class="w-full px-4 py-3 border border-gray-300 focus:border-brandRed focus:ring-1 focus:ring-brandRed outline-none transition-all rounded-sm" placeholder="e.g. 225/65R17">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold uppercase tracking-widest text-gray-700 mb-2">Message (Optional)</label>
+                        <textarea name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 focus:border-brandRed focus:ring-1 focus:ring-brandRed outline-none transition-all rounded-sm" placeholder="Tell us more about your vehicle or specific needs..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brandRed hover:bg-black text-white font-bold py-4 uppercase tracking-widest transition-all shadow-xl flex items-center justify-center">
+                        Send My Request <i class="fa-solid fa-arrow-right ml-3"></i>
+                    </button>
+                    
+                    <!-- Success Message Box -->
+                    <div id="success-msg" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-center font-bold">
+                        Thanks! We've received your request and will call you shortly.
+                    </div>
+                </form>
+            </div>
+
+            <!-- Direct Contact Methods -->
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 text-center fade-in">
+                <a href="tel:+12105550000" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 bg-white border border-gray-200 rounded-full flex items-center justify-center mb-4 group-hover:bg-brandRed group-hover:text-white transition-all text-brandRed">
+                        <i class="fa-solid fa-phone text-2xl"></i>
+                    </div>
+                    <span class="text-lg font-bold uppercase mb-1">Call Us Directly</span>
+                    <span class="text-gray-500 font-oswald tracking-wider">(210) 555-0000</span>
+                </a>
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 bg-white border border-gray-200 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-500 group-hover:text-white transition-all text-green-500">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    </div>
+                    <span class="text-lg font-bold uppercase mb-1">WhatsApp Us</span>
+                    <span class="text-gray-500 font-oswald tracking-wider">Fast Response</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Location & Hours -->
+    <section id="location" class="bg-white">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <!-- Map Column -->
+            <div class="w-full h-[400px] md:h-auto min-h-[400px]">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111202.99303350435!2d-98.6366057!3d29.4189381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x865c58af04d00eaf%3A0x856e13b10fed01ac!2sSan%20Antonio%2C%20TX!5e0!3m2!1sen!2sus!4v1714560000000!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <!-- Hours Column -->
+            <div class="p-12 md:p-20 bg-brandBlack text-white flex flex-col justify-center">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold uppercase mb-6 flex items-center">
+                        <i class="fa-solid fa-map-location-dot text-brandRed mr-4"></i> Find Us
+                    </h2>
+                    <p class="text-xl text-gray-400 leading-relaxed mb-6">
+                        1316 Live Oak St,<br>
+                        Commerce, TX 75428,<br>
+                        United States
+                    </p>
+                    <a href="https://maps.google.com/maps?q=1316+Live+Oak+St,+Commerce,+TX+75428" target="_blank" class="text-brandRed hover:text-white font-bold uppercase tracking-widest text-sm flex items-center transition-all">
+                        Get Directions <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="border-t border-white/10 pt-10">
+                    <h3 class="text-xl font-bold uppercase mb-6 flex items-center">
+                        <i class="fa-solid fa-clock text-brandRed mr-4"></i> Business Hours
+                    </h3>
+                    <table class="w-full text-lg">
+                        <tr class="border-b border-white/5">
+                            <td class="py-3 text-gray-400">Mon – Fri</td>
+                            <td class="py-3 text-right font-bold tracking-wider">8:00 AM – 6:00 PM</td>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="py-3 text-gray-400">Saturday</td>
+                            <td class="py-3 text-right font-bold tracking-wider">8:00 AM – 4:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 text-brandRed uppercase italic font-bold">Sunday</td>
+                            <td class="py-3 text-right text-gray-500 font-bold uppercase">Closed</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Footer -->
+    <footer class="bg-brandBlack py-16 border-t border-white/5 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Branding -->
+                <div>
+                    <a href="#" class="text-2xl font-bold text-brandRed block mb-6 uppercase tracking-tighter">Castillo Tire Shop</a>
+                    <p class="text-gray-500 mb-8 max-w-xs leading-relaxed">
+                        San Antonio's trusted choice for tires, brakes, and alignments since 2010. Quality service that keeps your family safe.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-brandRed flex items-center justify-center rounded-full transition-all text-gray-400 hover:text-white">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-brandRed flex items-center justify-center rounded-full transition-all text-gray-400 hover:text-white">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-brandRed flex items-center justify-center rounded-full transition-all text-gray-400 hover:text-white">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="md:text-center">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-brandRed mb-8">Quick Links</h4>
+                    <ul class="space-y-4 font-bold uppercase text-xs tracking-widest">
+                        <li><a href="#services" class="hover:text-brandRed transition-colors">Services</a></li>
+                        <li><a href="#reviews" class="hover:text-brandRed transition-colors">Reviews</a></li>
+                        <li><a href="#contact" class="hover:text-brandRed transition-colors">Contact</a></li>
+                        <li><a href="#location" class="hover:text-brandRed transition-colors">Hours</a></li>
+                        <li><a href="#about" class="hover:text-brandRed transition-colors">Our Story</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact info -->
+                <div class="md:text-right">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-brandRed mb-8">Contact Us</h4>
+                    <a href="tel:+12105550000" class="text-3xl font-bold block mb-4 hover:text-brandRed transition-colors font-oswald">(210) 555-0000</a>
+                    <p class="text-gray-500 mb-1">1316 Live Oak St</p>
+                    <p class="text-gray-500">Commerce, TX 75428</p>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-bold uppercase tracking-widest">
+                <p class="mb-4 md:mb-0">© 2025 Castillo Tire Shop · All Rights Reserved</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SECTION: Mobile Call Bar -->
+    <a href="tel:+12105550000" class="md:hidden fixed bottom-0 left-0 w-full bg-brandRed text-white py-4 flex items-center justify-center z-[100] shadow-[0_-5px_20px_rgba(204,0,0,0.3)] animate-pulse">
+        <i class="fa-solid fa-phone mr-3"></i>
+        <span class="font-bold uppercase tracking-widest">Tap to Call Now</span>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.querySelector('#menu-btn i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+        
+        document.getElementById('menu-btn').addEventListener('click', toggleMenu);
+
+        // 2. Stat counters animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const suffix = counter.getAttribute('data-suffix') || '';
+                let count = 0;
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 20);
+                
+                const timer = setInterval(() => {
+                    count += step;
+                    if (count >= target) {
+                        counter.innerText = target.toLocaleString() + suffix;
+                        clearInterval(timer);
+                    } else {
+                        counter.innerText = Math.floor(count).toLocaleString() + suffix;
+                    }
+                }, 20);
+            });
+        }
+
+        // 3. Intersection Observer for Fade-Ins
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // If counters are in view, start animation
+                    if (entry.target.querySelector('.stat-counter')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 4. Form Validation & Submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const name = document.getElementById('name');
+            const phone = document.getElementById('phone');
+            const nameError = document.getElementById('name-error');
+            const phoneError = document.getElementById('phone-error');
+            const successMsg = document.getElementById('success-msg');
+            let isValid = true;
+
+            // Reset errors
+            name.classList.remove('border-brandRed');
+            phone.classList.remove('border-brandRed');
+            nameError.classList.add('hidden');
+            phoneError.classList.add('hidden');
+            successMsg.classList.add('hidden');
+
+            // Validate
+            if (!name.value.trim()) {
+                name.classList.add('border-brandRed');
+                nameError.classList.remove('hidden');
+                isValid = false;
+            }
+            if (!phone.value.trim()) {
+                phone.classList.add('border-brandRed');
+                phoneError.classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Mock submission
+                const btn = form.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+
+                setTimeout(() => {
+                    successMsg.classList.remove('hidden');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    form.reset();
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 1500);
+            }
+        }
+
+        // 5. Smooth Scroll adjustments (optional if browser-level is used)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offset = 80; // Nav height
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = target.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
+
